@@ -1,41 +1,79 @@
-from tkinter import Canvas, Tk
+from tkinter import Canvas as TkCanvas, Tk
 from typing import Union
 
-# Missing argument custom error
+# Custom exception for missing or invalid arguments
 class MissingArgumentError(Exception):
-    """Raised exception for missing arguments."""
+    """Exception raised for missing or invalid arguments."""
     pass
 
-# Window initialization
-class Canvas():
-    def __init__(self, title: str = "My Canvas", width: int = 500, height: int = 800, background_color: Union[str, tuple]) -> None:
+# Main CanvasBuilder class to handle the creation and management of a Tkinter canvas
+class CanvasBuilder:
+    def __init__(self, title: str = "My Canvas", width: int = 500, height: int = 800, background_color: Union[str, tuple] = "white") -> None:
+        """
+        Initializes a new Tkinter window and canvas with the given parameters.
 
+        Args:
+            title (str): The window title.
+            width (int): The width of the canvas.
+            height (int): The height of the canvas.
+            background_color (Union[str, tuple]): The background color of the canvas (hex string or tuple).
+        
+        Raises:
+            ValueError: If invalid types or values are provided for any argument.
+        """
         self._initialized = False
         
-        # Type checks
+        # Argument validation and error handling
         if not isinstance(title, str):
             raise ValueError("The 'title' argument must be a string.")
-
-        if not isinstance(width, int):
-            raise ValueError("The 'width' argument must be an integer.")
-        if width <= 0:
+        if not isinstance(width, int) or width <= 0:
             raise ValueError("The 'width' argument must be a positive integer.")
-
-        if not isinstance(height, int):
-            raise ValueError("The 'height' argument must be an integer.")
-        if height <= 0:
+        if not isinstance(height, int) or height <= 0:
             raise ValueError("The 'height' argument must be a positive integer.")
+        if not isinstance(background_color, (str, tuple)):
+            raise ValueError("The 'background_color' argument must be a string (hex) or a tuple (RGB).")
 
-        if not isinstance(background_color, Union[str, tuple]):
-            raise ValueError("The 'background_color' argument must be a string or a tuple.")
+        # Tkinter window and canvas setup
+        self.root = Tk()  # Create the root window
+        self.root.title(title)  # Set window title
+        self.canvas = TkCanvas(self.root, width=width, height=height, bg=background_color)  # Create canvas
+        self.canvas.pack()  # Add the canvas to the window
 
-        self.root = Tk()
-        self.root.title(title)
-        self.canvas = Canvas(self.root, width=width, height=height, bg=background_color)
+        # Set instance variables and mark as initialized
         self._initialized = True
         self.width = width
         self.height = height
         self.background_color = background_color
 
-    def initialized(self):
-        return True if self._initialized else False
+    def initialized(self) -> bool:
+        """
+        Returns the initialization status of the canvas.
+
+        Returns:
+            bool: True if the canvas is initialized, False otherwise.
+        """
+        return self._initialized
+
+    def run(self):
+        """
+        Starts the Tkinter main loop to display the canvas window.
+        
+        Raises:
+            RuntimeError: If the canvas is not initialized.
+        """
+        if self._initialized:
+            self.root.mainloop()  # Start Tkinter event loop
+        else:
+            raise RuntimeError("Canvas not initialized properly.")
+
+    def breakCanvas(self):
+        """
+        Terminates the Tkinter main loop and closes the canvas window.
+
+        Raises:
+            RuntimeError: If the canvas is not initialized.
+        """
+        if self._initialized:
+            self.root.destroy()  # Destroy the Tkinter window and stop the main loop
+        else:
+            raise RuntimeError("Cannot break: Canvas not initialized.")
