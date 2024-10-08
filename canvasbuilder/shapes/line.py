@@ -1,4 +1,5 @@
 # line.py
+from tkinter import Canvas
 from .shape import Shape, ShapeError
 
 class Line(Shape):
