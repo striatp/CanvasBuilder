@@ -10,6 +10,8 @@ class MissingArgumentError(Exception):
 class Canvas():
     def __init__(self, title: str = "My Canvas", width: int = 500, height: int = 800, background_color: Union[str, tuple]) -> None:
 
+        self._initialized = False
+        
         # Type checks
         if not isinstance(title, str):
             raise ValueError("The 'title' argument must be a string.")
@@ -25,7 +27,15 @@ class Canvas():
             raise ValueError("The 'height' argument must be a positive integer.")
 
         if not isinstance(background_color, Union[str, tuple]):
+            raise ValueError("The 'background_color' argument must be a string or a tuple.")
 
         self.root = Tk()
         self.root.title(title)
         self.canvas = Canvas(self.root, width=width, height=height, bg=background_color)
+        self._initialized = True
+        self.width = width
+        self.height = height
+        self.background_color = background_color
+
+    def initialized(self):
+        return True if self._initialized else False
