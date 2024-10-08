@@ -1,4 +1,5 @@
 # square.py
+from tkinter import Canvas
 from .shape import Shape, ShapeError
 
 class Square(Shape):
