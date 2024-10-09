@@ -1,6 +1,8 @@
 from tkinter import Canvas as TkCanvas, Tk
 from typing import Union
 
+is_initialized = False
+
 # Custom exception for missing or invalid arguments
 class MissingArgumentError(Exception):
     """Exception raised for missing or invalid arguments."""
@@ -21,7 +23,6 @@ class CanvasBuilder:
         Raises:
             ValueError: If invalid types or values are provided for any argument.
         """
-        self._initialized = False
         
         # Argument validation and error handling
         if not isinstance(title, str):
@@ -40,19 +41,11 @@ class CanvasBuilder:
         self.canvas.pack()  # Add the canvas to the window
 
         # Set instance variables and mark as initialized
-        self._initialized = True
+        global is_initialized
+        is_initialized = True
         self.width = width
         self.height = height
         self.background_color = background_color
-
-    def initialized(self) -> bool:
-        """
-        Returns the initialization status of the canvas.
-
-        Returns:
-            bool: True if the canvas is initialized, False otherwise.
-        """
-        return self._initialized
 
     def run(self):
         """
@@ -77,3 +70,12 @@ class CanvasBuilder:
             self.root.destroy()  # Destroy the Tkinter window and stop the main loop
         else:
             raise RuntimeError("Cannot break: Canvas not initialized.")
+
+def initialized(self) -> bool:
+    """
+    Returns the initialization status of the canvas.
+
+    Returns:
+        bool: True if the canvas is initialized, False otherwise.
+    """
+    return True if is_initialized else False
