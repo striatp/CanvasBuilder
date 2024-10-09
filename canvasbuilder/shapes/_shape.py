@@ -1,3 +1,5 @@
+from ../core import initialized
+
 class ShapeError(Exception):
     """Custom exception for shape-related errors."""
     pass
@@ -22,6 +24,10 @@ class Shape:
         Raises:
             ShapeError: If the color is not a valid string.
         """
+        
+        if not initialized:
+            raise ShapeError("") # init error
+        
         self.x = x
         self.y = y
         self.color = color
