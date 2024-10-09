@@ -1,16 +1,13 @@
 from typing import Union
 from tkinter import Canvas as TkCanvas, Tk
 
-# Execption for missing arguments or invalid params
+# Exception for missing arguments or invalid parameters
 class MissingArgumentError(Exception):
-    """Raised exception for missing arguments or invalid params inputs"""
+    """Raised for missing arguments or invalid parameter inputs."""
     pass
 
-# Set the default initialization to false
-is_initialized = False
-
 # Main core class to initialize the canvas
-class Create():
+class Create:
     def __init__(self, title: str = "My Canvas", width: int = 300, height: int = 300, background_color: Union[str, tuple] = "white") -> None:
         """
         Initializes a new Tkinter window and canvas with the given parameters.
@@ -20,12 +17,11 @@ class Create():
             width (int): The width of the canvas.
             height (int): The height of the canvas.
             background_color (Union[str, tuple]): The background color of the canvas (hex string or tuple).
-        
+
         Raises:
             ValueError: If invalid types or values are provided for any argument.
         """
-
-        # Argument validation and error handling
+        # Argument validation
         if not isinstance(title, str):
             raise ValueError("The 'title' argument must be a string.")
         if not isinstance(width, int) or width <= 0:
@@ -35,34 +31,35 @@ class Create():
         if not isinstance(background_color, (str, tuple)):
             raise ValueError("The 'background_color' argument must be a string (hex) or a tuple (RGB).")
         
-        # Tkinter window and canvas setup
-        self.root = Tk()  # Create the root window
-        self.root.title(title)  # Set window title
-        self.canvas = TkCanvas(self.root, width=width, height=height, bg=background_color)  # Create canvas
-        self.canvas.pack()  # Add the canvas to the window
-
-        # Set instance variables and mark as initialized
-        global is_initialized
-        is_initialized = True
+        # Initialize the Tkinter root window
+        self.root = Tk()
+        self.root.title(title)  # Set the window title
+        
+        # Create the canvas and set the background color
+        self.canvas = TkCanvas(self.root, width=width, height=height, bg=background_color)
+        self.canvas.pack()  # Add the canvas to the root window
+        
+        # Track initialization state
+        self._initialized = True
+        
+        # Store parameters for future use
         self.width = width
         self.height = height
         self.background_color = background_color
-    
-    # Display the empty canvas on the screen
-    def run(self):
+
+    def run(self) -> None:
         """
         Starts the Tkinter main loop to display the canvas window.
-        
+
         Raises:
             RuntimeError: If the canvas is not initialized.
         """
         if self._initialized:
-            self.root.mainloop()  # Start Tkinter event loop
+            self.root.mainloop()  # Start the Tkinter event loop
         else:
             raise RuntimeError("Canvas not initialized properly.")
 
-    # Closes the canvas
-    def breakCanvas(self):
+    def breakCanvas(self) -> None:
         """
         Terminates the Tkinter main loop and closes the canvas window.
 
@@ -70,16 +67,15 @@ class Create():
             RuntimeError: If the canvas is not initialized.
         """
         if self._initialized:
-            self.root.destroy()  # Destroy the Tkinter window and stop the main loop
+            self.root.destroy()  # Close the Tkinter window
         else:
             raise RuntimeError("Cannot break: Canvas not initialized.")
 
-# Function to check if the canvas has been initialized
-def initialized(self) -> bool:
-    """
-    Returns the initialization status of the canvas.
+    def is_initialized(self) -> bool:
+        """
+        Returns the initialization status of the canvas.
 
-    Returns:
-        bool: True if the canvas is initialized, False otherwise.
-    """
-    return True if is_initialized else False
+        Returns:
+            bool: True if the canvas is initialized, False otherwise.
+        """
+        return self._initialized
