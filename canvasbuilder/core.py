@@ -9,6 +9,7 @@ class MissingArgumentError(Exception):
 # Set the default initialization to false
 is_initialized = False
 
+# Main core class to initialize the canvas
 class Create():
     def __init__(self, title: str = "My Canvas", width: int = 300, height: int = 300, background_color: Union[str, tuple] = "white") -> None:
         """
