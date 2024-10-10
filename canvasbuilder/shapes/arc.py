@@ -1,5 +1,6 @@
 # arc.py
 from tkinter import Canvas
+from ..core import initialized
 from .shape import Shape, ShapeError
 
 class Arc(Shape):
