@@ -6,6 +6,8 @@ class MissingArgumentError(Exception):
     """Raised for missing arguments or invalid parameter inputs."""
     pass
 
+is_initialized = False
+
 # Main core class to initialize the canvas
 class Create:
     def __init__(self, title: str = "My Canvas", width: int = 300, height: int = 300, background_color: Union[str, tuple] = "white") -> None:
@@ -40,7 +42,8 @@ class Create:
         self.canvas.pack()  # Add the canvas to the root window
         
         # Track initialization state
-        self._initialized = True
+        global is_initialized
+        is_initialized = True
         
         # Store parameters for future use
         self.width = width
@@ -71,11 +74,11 @@ class Create:
         else:
             raise RuntimeError("Cannot break: Canvas not initialized.")
 
-    def is_initialized(self) -> bool:
-        """
-        Returns the initialization status of the canvas.
+def is_initialized(self) -> bool:
+    """
+    Returns the initialization status of the canvas.
 
-        Returns:
-            bool: True if the canvas is initialized, False otherwise.
-        """
-        return self._initialized
+    Returns:
+        bool: True if the canvas is initialized, False otherwise.
+    """
+    return True if is_initialized else False
