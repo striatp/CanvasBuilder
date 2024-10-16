@@ -38,7 +38,7 @@ class Window:
     Attributes:
         root (Tk): The main Tkinter window instance.
     """
-    
+
     # Variable to track if the window is initialized
     window_initialized = False
 
@@ -56,11 +56,11 @@ class Window:
             WindowError: If the window has already been initialized.
             ValueError: If width or height is not a positive integer or if title is not a string.
         """
-        
+
         # Checking if the window wasn't initialized before
-        if window_initialized:
+        if Window.window_initialized:
             raise WindowError("The window is already initialized.")
-        
+
         # Type checks and errors handling
         if not isinstance(width, int) or width <= 0:
             raise ValueError("The 'width' argument must be a positive integer.")
@@ -73,9 +73,9 @@ class Window:
         self.root = Tk()  # Initialize the Tk window
         self.root.geometry(f"{width}x{height}")
         self.root.title(title)
-        
+
         # Prevents another window initialization
-        window_initialized = True
+        Window.window_initialized = True
 
     # Method to render the window
     def run(self) -> None:
@@ -114,13 +114,13 @@ class Canvas:
             WindowError: If a window has not been initialized.
             ValueError: If width or height is not a positive integer, if the background_color is not valid.
         """
-        
+
         # Checking if the window wasn't initialized before
-        if canvas_initialized:
+        if Canvas.canvas_initialized:
             raise CanvasError("The canvas is already drawn.")
 
         # Checks if the window is initialized
-        if not window_initialized:
+        if not Window.window_initialized:
             raise WindowError("A window must be initialized before the canvas.")
 
         # Type checks and errors handling
@@ -149,4 +149,4 @@ class Canvas:
         self.canvas.pack(anchor=CENTER, expand=True)
 
         # Prevents another canvas from being appended
-        canvas_initialized = True
+        Canvas.canvas_initialized = True
