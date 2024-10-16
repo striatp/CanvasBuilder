@@ -1,9 +1,13 @@
 from typing import Union, Tuple
 from .Exceptions.WindowErrorHandling import WindowError # Importing the window error handler
+from .Exceptions.CanvasErrorHandling import CanvasError # Importing the canvas error handler
 from tkinter import Tk, Canvas as TkCanvas, CENTER
 
 # Variable to track if the window is initialized
 window_initialized = False
+
+# Variable to track if the canvas is drawn
+canvas_initialized = False
 
 # Color map
 color_map = {
@@ -111,6 +115,12 @@ class Canvas:
             WindowError: If a window has not been initialized.
             ValueError: If width or height is not a positive integer, if the background_color is not valid.
         """
+        global canvas_initialized
+        
+        # Checking if the window wasn't initialized before
+        if canvas_initialized:
+            raise CanvasError("The canvas is already drawn.")
+
         # Checks if the window is initialized
         if not window_initialized:
             raise WindowError("A window must be initialized before the canvas.")
