@@ -4,7 +4,7 @@
 from .core import Window, Canvas, rgb_to_hex
 from .Exceptions.WindowErrorHandling import WindowError
 
-# Make these available when importing the package
+# Available ressources for the public API
 __all__ = [
     "Window",
     "Canvas",
