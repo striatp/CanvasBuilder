@@ -96,7 +96,7 @@ class Canvas:
     """
 
     # Initializing the class
-    def __init__(self, window: Window, width: int, height: int, background_color: Union[str, Tuple[int, int, int]]) -> None:
+    def __init__(self, window: Window, width: int, height: int, background_color: Union[str, Tuple[int, int, int]] = "white") -> None:
         """
         Initialize the Canvas instance.
 
