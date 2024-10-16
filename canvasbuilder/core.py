@@ -149,3 +149,6 @@ class Canvas:
         # Access the root from the Window instance and create the canvas
         self.canvas = TkCanvas(window.root, width=width, height=height, bg=self.background_color)
         self.canvas.pack(anchor=CENTER, expand=True)
+
+        # Prevents another canvas from being appended
+        canvas_initialized = True
