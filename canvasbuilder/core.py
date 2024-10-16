@@ -1,5 +1,5 @@
 from typing import Union, Tuple
-from .WindowErrorHandling import WindowError  # Importing the window error handler
+from .Exception.WindowErrorHandling import WindowError # Importing the window error handler
 from tkinter import Tk, Canvas as TkCanvas, CENTER
 
 # Variable to track if the window is initialized
