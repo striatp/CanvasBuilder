@@ -72,13 +72,14 @@ class Canvas:
         if isinstance(background_color, str):
             if background_color not in color_map:
                 raise ValueError(f"The 'background_color' argument must be one of: {', '.join(color_map)}")
+            self.background_color = background_color
         # Background color checks: tuple (convert to hex)
         elif isinstance(background_color, tuple):
             if len(background_color) == 3:
                 for c in background_color:
                     if not 0 <= c <= 255:
                         raise ValueError("Each value in the 'background_color' tuple must be between 0 and 255.")
-                self.background = rgb_to_hex(background_color)  # Convert tuple to hex
+                self.background_color = rgb_to_hex(background_color)  # Convert tuple to hex
             else:
                 raise ValueError("The 'background_color' argument must be a tuple of 3 integers.")
 
