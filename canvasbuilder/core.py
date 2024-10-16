@@ -34,13 +34,14 @@ class Window:
         # Start the main loop for the window
         self.root.mainloop()  
 
+# Canvas class to create and append the canvas on the screen
 class Canvas():
-    def __init__(self, window: Window, width: int, height: int, background_color: str, position: str = 'center'):
+    # Initializing the class
+    def __init__(self, window: Window, width: int, height: int, background_color: str):
+        # Checks if the window is initialized
         if not window_initialized:
             raise WindowError("A window must be initialized before the canvas.")
         
         # Access the root from the Window instance
         self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color, anchor=CENTER)
-        
-        # Pack or place the canvas based on the provided position (can be expanded to include position handling)
-        self.canvas.pack(anchor)
+        self.canvas.pack(anchor=CENTER)
