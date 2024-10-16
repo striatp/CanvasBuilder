@@ -78,10 +78,10 @@ class Canvas:
                 for c in background_color:
                     if not 0 <= c <= 255:
                         raise ValueError("Each value in the 'background_color' tuple must be between 0 and 255.")
-                background_color = rgb_to_hex(background_color)  # Convert tuple to hex
+                self.background = rgb_to_hex(background_color)  # Convert tuple to hex
             else:
                 raise ValueError("The 'background_color' argument must be a tuple of 3 integers.")
 
         # Access the root from the Window instance and create the canvas
-        self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color)
+        self.canvas = TkCanvas(window.root, width=width, height=height, bg=self.background_color)
         self.canvas.pack(anchor=CENTER, expand=True)
