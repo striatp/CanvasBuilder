@@ -1,4 +1,4 @@
-from tkinter import Tk, Canvas as TkCanvas
+from tkinter import Tk, Canvas as TkCanvas, CENTER
 
 window_initialized = False
 
@@ -19,12 +19,7 @@ class Canvas:
             raise WindowError("A window must be initialized before the canvas.")
         
         # Access the root from the Window instance
-        self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color)
+        self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color, anchor=CENTER)
         
         # Pack or place the canvas based on the provided position (can be expanded to include position handling)
         self.canvas.pack()
-
-# Example usage
-window = Window(800, 600, "My Canvas")
-canvas = Canvas(window, width=500, height=400, background_color="white")
-window.run()
