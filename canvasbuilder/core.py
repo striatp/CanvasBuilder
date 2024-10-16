@@ -1,5 +1,5 @@
 from typing import Union, Tuple
-from .WindowErrorHandling import WindowError # Importing the errors handlers
+from .WindowErrorHandling import WindowError  # Importing the window error handler
 from tkinter import Tk, Canvas as TkCanvas, CENTER
 
 # Variable to track if the window is initialized
@@ -21,12 +21,39 @@ color_map = {
 
 # Function to convert RGB tuple to hexadecimal string
 def rgb_to_hex(rgb: Tuple[int, int, int]) -> str:
+    """
+    Convert an RGB tuple to a hexadecimal color string.
+
+    Args:
+        rgb (Tuple[int, int, int]): A tuple containing three integers representing the red, green, and blue values.
+
+    Returns:
+        str: A string representing the hexadecimal color (e.g., '#ff0000' for red).
+    """
     return f'#{rgb[0]:02x}{rgb[1]:02x}{rgb[2]:02x}'
 
 # Window class to create the window
 class Window:
-    # Initializing the class
+    """
+    A class to create a Tkinter window.
+
+    Attributes:
+        root (Tk): The main Tkinter window instance.
+    """
+
     def __init__(self, width: int = 800, height: int = 600, title: str = "My Canvas") -> None:
+        """
+        Initialize the Window instance.
+
+        Args:
+            width (int): The width of the window (default is 800).
+            height (int): The height of the window (default is 600).
+            title (str): The title of the window (default is "My Canvas").
+
+        Raises:
+            WindowError: If the window has already been initialized.
+            ValueError: If width or height is not a positive integer or if title is not a string.
+        """
         global window_initialized
         
         # Checking if the window wasn't initialized before
@@ -49,15 +76,38 @@ class Window:
         # Prevents another window initialization
         window_initialized = True
 
-    # Method to display the window
     def render(self) -> None:
-        # Start the main loop for the window
+        """
+        Start the main loop for the Tkinter window to display it.
+
+        This method should be called to make the window responsive.
+        """
         self.root.mainloop()  
 
 # Canvas class to create and append the canvas on the screen
 class Canvas:
-    # Initializing the class
+    """
+    A class to create a Tkinter canvas.
+
+    Attributes:
+        canvas (TkCanvas): The Tkinter canvas instance.
+    """
+
     def __init__(self, window: Window, width: int, height: int, background_color: Union[str, Tuple[int, int, int]]) -> None:
+        """
+        Initialize the Canvas instance.
+
+        Args:
+            window (Window): The Window instance to which the canvas will be attached.
+            width (int): The width of the canvas.
+            height (int): The height of the canvas.
+            background_color (Union[str, Tuple[int, int, int]]): The background color of the canvas, 
+                either as a string from the color map or an RGB tuple.
+
+        Raises:
+            WindowError: If a window has not been initialized.
+            ValueError: If width or height is not a positive integer, if the background_color is not valid.
+        """
         # Checks if the window is initialized
         if not window_initialized:
             raise WindowError("A window must be initialized before the canvas.")
