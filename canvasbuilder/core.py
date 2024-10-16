@@ -31,6 +31,7 @@ class Window:
 
     # Method to display the window
     def run(self):
+        # Start the main loop for the window
         self.root.mainloop()  
 
 class Canvas():
