@@ -8,6 +8,8 @@ window_initialized = False
 class Window:
     # Initializing the class
     def __init__(self, width: int = 800, height: int = 600, title: str = "My Canvas"):
+        global window_initialized
+        
         # Checking if the window wasn't initialized before
         if window_initialized:
             raise WindowError("The window is already initialized.")
@@ -26,7 +28,6 @@ class Window:
         self.root.title(title)
         
         # Makes sure the window variable is now on True, which prevents another window initialization
-        global window_initialized
         window_initialized = True
 
     # Method to display the window
@@ -44,4 +45,4 @@ class Canvas():
         
         # Access the root from the Window instance
         self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color, anchor=CENTER)
-        self.canvas.pack(anchor=CENTER)
+        self.canvas.pack(anchor=CENTER, expand=True)
