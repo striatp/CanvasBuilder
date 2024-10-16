@@ -1,0 +1,2 @@
+class WindowError(Exception):
+  pass
