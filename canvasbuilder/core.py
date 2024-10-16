@@ -50,7 +50,7 @@ class Window:
         window_initialized = True
 
     # Method to display the window
-    def run(self) -> None:
+    def render(self) -> None:
         # Start the main loop for the window
         self.root.mainloop()  
 
