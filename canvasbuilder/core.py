@@ -3,12 +3,6 @@ from .Exceptions.WindowErrorHandling import WindowError # Importing the window e
 from .Exceptions.CanvasErrorHandling import CanvasError # Importing the canvas error handler
 from tkinter import Tk, Canvas as TkCanvas, CENTER
 
-# Variable to track if the window is initialized
-window_initialized = False
-
-# Variable to track if the canvas is drawn
-canvas_initialized = False
-
 # Color map
 color_map = {
     "blue",
@@ -44,6 +38,9 @@ class Window:
     Attributes:
         root (Tk): The main Tkinter window instance.
     """
+    
+    # Variable to track if the window is initialized
+    window_initialized = False
 
     # Initializing the class
     def __init__(self, width: int = 800, height: int = 600, title: str = "My Canvas") -> None:
@@ -59,7 +56,6 @@ class Window:
             WindowError: If the window has already been initialized.
             ValueError: If width or height is not a positive integer or if title is not a string.
         """
-        global window_initialized
         
         # Checking if the window wasn't initialized before
         if window_initialized:
@@ -99,6 +95,9 @@ class Canvas:
         canvas (TkCanvas): The Tkinter canvas instance.
     """
 
+    # Variable to track if the canvas is drawn
+    canvas_initialized = False
+
     # Initializing the class
     def __init__(self, window: Window, width: int, height: int, background_color: Union[str, Tuple[int, int, int]] = "white") -> None:
         """
@@ -115,7 +114,6 @@ class Canvas:
             WindowError: If a window has not been initialized.
             ValueError: If width or height is not a positive integer, if the background_color is not valid.
         """
-        global canvas_initialized
         
         # Checking if the window wasn't initialized before
         if canvas_initialized:
