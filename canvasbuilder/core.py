@@ -1,3 +1,4 @@
+from typing import Union, Tuple
 from .ErrorsHandler import WindowError # Importing the errors handlers
 from tkinter import Tk, Canvas as TkCanvas, CENTER
 
@@ -7,7 +8,7 @@ window_initialized = False
 # Window class to create the window
 class Window:
     # Initializing the class
-    def __init__(self, width: int = 800, height: int = 600, title: str = "My Canvas"):
+    def __init__(self, width: int = 800, height: int = 600, title: str = "My Canvas") -> None:
         global window_initialized
         
         # Checking if the window wasn't initialized before
@@ -31,18 +32,24 @@ class Window:
         window_initialized = True
 
     # Method to display the window
-    def run(self):
+    def run(self) -> None:
         # Start the main loop for the window
         self.root.mainloop()  
 
 # Canvas class to create and append the canvas on the screen
-class Canvas():
+class Canvas:
     # Initializing the class
-    def __init__(self, window: Window, width: int, height: int, background_color: str):
+    def __init__(self, window: Window, width: int, height: int, background_color: Union[str, Tuple[int, int, int]]) -> None:
         # Checks if the window is initialized
         if not window_initialized:
             raise WindowError("A window must be initialized before the canvas.")
-        
+
+        # Type checks and errors handling
+        if not isinstance(width, int) or width <= 0:
+            raise ValueError("The 'width' argument must be a positive integer.")
+        if not isinstance(height, int) or height <= 0:
+            raise ValueError("The 'height' argument must be a positive integer.")
+
         # Access the root from the Window instance
-        self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color, anchor=CENTER)
+        self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color)
         self.canvas.pack(anchor=CENTER, expand=True)
