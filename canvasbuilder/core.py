@@ -63,12 +63,18 @@ class Canvas:
             raise ValueError("The 'width' argument must be a positive integer.")
         if not isinstance(height, int) or height <= 0:
             raise ValueError("The 'height' argument must be a positive integer.")
-        # Background color checks
+        # Background color checks : string
         if isinstance(background_color, str):
             if not background_color in color_map:
                 raise ValueError(f"The 'background_color' argument must be a tuple or a string equal to one of the set of colors: {", ".join(color_map)}")
-
-        # raise ValueError("The 'background' argument must be a string or a tuple.")
+        # Background color checks : tuple
+        elif isinstance(background_color, tuple):
+            if len(background_color) == 3:
+                for c in background_color:
+                    if not 0 < c <= 255:
+                        raise ValueError("The 'background_color' argument must be a tuple of 3 integers each between 1 and 255.")
+            else:
+                raise ValueError("The 'background' argument must be tuple of 3 integers.")
 
         # Access the root from the Window instance
         self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color)
