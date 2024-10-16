@@ -5,6 +5,20 @@ from tkinter import Tk, Canvas as TkCanvas, CENTER
 # Variable to track if the window is initialized
 window_initialized = False
 
+# Color map
+color_map = {
+    "blue",
+    "red",
+    "green",
+    "yellow",
+    "brown",
+    "black",
+    "white",
+    "orange",
+    "purple",
+    "gray"
+}
+
 # Window class to create the window
 class Window:
     # Initializing the class
@@ -24,7 +38,7 @@ class Window:
             raise ValueError("The 'title' argument must be a string.")
 
         # Initializing the window
-        self.root = Tk()  # Initialize the Tk window
+        self.root = Tk() # Initialize the Tk window
         self.root.geometry(f"{width}x{height}")
         self.root.title(title)
         
@@ -49,6 +63,7 @@ class Canvas:
             raise ValueError("The 'width' argument must be a positive integer.")
         if not isinstance(height, int) or height <= 0:
             raise ValueError("The 'height' argument must be a positive integer.")
+        if not isinstance(background_color, (str, tuple)):
 
         # Access the root from the Window instance
         self.canvas = TkCanvas(window.root, width=width, height=height, bg=background_color)
