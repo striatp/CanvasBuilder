@@ -41,6 +41,7 @@ class Window:
         root (Tk): The main Tkinter window instance.
     """
 
+    # Initializing the class
     def __init__(self, width: int = 800, height: int = 600, title: str = "My Canvas") -> None:
         """
         Initialize the Window instance.
@@ -76,7 +77,8 @@ class Window:
         # Prevents another window initialization
         window_initialized = True
 
-    def render(self) -> None:
+    # Method to render the window
+    def run(self) -> None:
         """
         Start the main loop for the Tkinter window to display it.
 
@@ -93,6 +95,7 @@ class Canvas:
         canvas (TkCanvas): The Tkinter canvas instance.
     """
 
+    # Initializing the class
     def __init__(self, window: Window, width: int, height: int, background_color: Union[str, Tuple[int, int, int]]) -> None:
         """
         Initialize the Canvas instance.
