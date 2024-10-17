@@ -4,6 +4,7 @@ from ..Exceptions.CanvasErrorHandling import CanvasError
 
 class Rectangle:
     def __init__(self, x: int = None, y: int = None, width: int = None, height: int = None, fill_color: Union[str, Tuple[int, int, int]]):
+        
         # Initialization code here
 
     def draw(self):
