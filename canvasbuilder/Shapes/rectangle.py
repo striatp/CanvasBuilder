@@ -1,5 +1,6 @@
 from ..core import Canvas
 from typing import Union, Tuple
+from ..Ressources.color_dictionary import color_dict as colors
 from ..Exceptions.CanvasErrorHandling import CanvasError
 
 class Rectangle:
@@ -19,8 +20,8 @@ class Rectangle:
           raise ValueError("The 'fill_color' argument must be a string or a tuple of 3 integers.")
 
       if isinstance(fill_color, str):
-          if not fill_color in color_dictionary:
-              raise 
+          if not fill_color in colors:
+              raise ValueError(f"The 'fill_coloe' argument must contain")
 
     
     def draw(self):
